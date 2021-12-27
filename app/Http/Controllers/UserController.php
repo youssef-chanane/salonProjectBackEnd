@@ -38,6 +38,9 @@ class UserController extends Controller
             'email'=>$request->email,
             'password'=>Hash::make($request->password)
         ]);
-        return response()->json($user);
+        $role=$user->role()->create([
+            "role"=>1
+        ]);
+        return response()->json($user->only(['email','password']));
     }
 }

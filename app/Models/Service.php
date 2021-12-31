@@ -7,21 +7,21 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class Salon extends Model
+class Service extends Model
 {
-    use HasFactory,HasApiTokens,Notifiable;
+    use HasApiTokens, HasFactory, Notifiable;
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
     protected $fillable = [
-        'salon_name',
-        'nb_barber',
-        'phone',
+        'title',
+        'description',
+        'price',
         'user_id'
-        ];
-
+    ];
     public function user()
     {
         return $this->belongsTo(User::class);

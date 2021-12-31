@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class Salon extends Model
+class Image extends Model
 {
     use HasFactory,HasApiTokens,Notifiable;
     /**
@@ -16,9 +16,7 @@ class Salon extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'salon_name',
-        'nb_barber',
-        'phone',
+        'url',
         'user_id'
         ];
 
@@ -26,5 +24,4 @@ class Salon extends Model
     {
         return $this->belongsTo(User::class);
     }
-
 }

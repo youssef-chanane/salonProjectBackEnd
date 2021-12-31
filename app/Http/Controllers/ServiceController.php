@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Service;
 use Illuminate\Http\Request;
-use App\Models\User;
-use App\Models\Salon;
 
-class SalonController extends Controller
+class ServiceController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -26,20 +25,21 @@ class SalonController extends Controller
      */
     public function store(Request $request)
     {
+
         $request->validate([
-            'salon_name' => 'required|string',
-            'nb_barber' => 'required',
-            'phone' => 'required',
+            'title' => 'required|string',
+            'description' => 'required',
+            'price' => 'required|integer',
         ]);
 
-        $salon = Salon::create([
-            'salon_name'=>$request->salon_name,
-            'nb_barber'=>$request->nb_barber,
-            'phone'=>$request->phone,
+        $service = Service::create([
+            'title'=>$request->title,
+            'description'=>$request->description,
+            'price'=>$request->price,
             'user_id'=>$request->user()->id,
         ]);
 
-        return response()->json($salon);
+        return response()->json($service);
     }
 
     /**
@@ -48,9 +48,9 @@ class SalonController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show()
+    public function show($id)
     {
-        
+        //
     }
 
     /**

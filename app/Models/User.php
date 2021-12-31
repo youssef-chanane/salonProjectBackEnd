@@ -46,4 +46,16 @@ class User extends Authenticatable
     {
         return $this->hasOne(Salon::class);
     }
+    public function services()
+    {
+        return $this->hasMany(Service::class);
+    }
+    public function barbers()
+    {
+        return $this->hasMany(Barber::class);
+    }
+    public function images()
+    {
+        return $this->hasMany(Image::class);
+    }
 }

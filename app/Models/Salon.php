@@ -4,21 +4,24 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
-class Role extends Model
+class Salon extends Model
 {
-    use HasFactory;
-        /**
-     * Get the user that owns the phone.
-     */
-        /**
+    use HasFactory,HasApiTokens,Notifiable;
+    /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
     protected $fillable = [
-        'role',
-    ];
+        'salon_name',
+        'nb_barber',
+        'phone',
+        'user_id'
+        ];
+    
     public function user()
     {
         return $this->belongsTo(User::class);

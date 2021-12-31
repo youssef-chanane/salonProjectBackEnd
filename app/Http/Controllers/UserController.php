@@ -33,14 +33,22 @@ class UserController extends Controller
             'email' => 'required|string|unique:users|email',
             'password' => 'required|min:4',
         ]);
+        
         $user = User::create([
             'name'=>$request->name,
             'email'=>$request->email,
-            'password'=>Hash::make($request->password)
+            'password'=>Hash::make($request->password),
+            'role'=>1
         ]);
-        $role=$user->role()->create([
-            "role"=>1
-        ]);
-        return response()->json($user->only(['email','password']));
+        
+        return response()->json($user->only(['role']));
+        // return $user->createToken($request->device_name)->plainTextToken;
+
+    }
+    public function upgradeToSalon(Request $request){
+        $user=$request->user();
+        $user->role=2;
+        $user->save();
+        return response()->json($user);
     }
 }

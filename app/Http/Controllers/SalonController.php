@@ -8,6 +8,10 @@ use App\Models\Salon;
 
 class SalonController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:sanctum')->only(['store','update','destroy']);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +19,8 @@ class SalonController extends Controller
      */
     public function index()
     {
-        //
+        $salons=Salon::get();
+        return response()->json($salons);
     }
 
     /**
@@ -48,9 +53,14 @@ class SalonController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show()
+
+     //show using user id
+    public function show($id)
     {
-        
+        // $salon=Salon::where('user_id',$id)->first();
+        // return response()->json($salon);
+
+
     }
 
     /**
@@ -62,7 +72,13 @@ class SalonController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        $salon=Salon::find($id);
+        $this->authorize('update',$salon);
+        $salon->update($request->all());
+        $salon->save();
+        return response()->json($salon);
+
     }
 
     /**
@@ -73,6 +89,9 @@ class SalonController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->authorize('delete',Salon::find($id));
+        Salon::destroy($id);
+        return response()->json();
+
     }
 }

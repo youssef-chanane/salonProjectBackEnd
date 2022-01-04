@@ -3,10 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\Barber;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class BarberController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:sanctum')->only(['store','update','destroy']);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +19,8 @@ class BarberController extends Controller
      */
     public function index()
     {
-        //
+
+
     }
 
     /**
@@ -48,7 +54,8 @@ class BarberController extends Controller
      */
     public function show($id)
     {
-        //
+        $barbers=Barber::where('user_id',$id)->get();
+        return response()->json($barbers);
     }
 
     /**

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Image;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class ImageController extends Controller
 {
@@ -25,6 +26,8 @@ class ImageController extends Controller
      */
     public function store(Request $request)
     {
+        Log::info($request);
+        // dd($request);
         if($request->hasFile('image')){
             $url=$request->file('image')->store('images');
         }

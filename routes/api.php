@@ -29,7 +29,7 @@ Route::middleware('auth:sanctum')->put('/user/upgradetosalon', [ App\Http\Contro
 Route::apiResource('/salon',  App\Http\Controllers\SalonController::class);
 Route::apiResource('/service',  App\Http\Controllers\ServiceController::class)->only(['store','show']);
 Route::apiResource('/barber',  App\Http\Controllers\BarberController::class);
-Route::middleware('auth:sanctum')->apiResource('/image',  App\Http\Controllers\ImageController::class)->only('store');
+Route::apiResource('/image',  App\Http\Controllers\ImageController::class)->only(['store','show']);
 
 Route::middleware('auth:sanctum')->get('/user/revoke', function (Request $request) {
    $user=$request->user();

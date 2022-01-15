@@ -17,6 +17,7 @@ class CreateSalonsTable extends Migration
             $table->id();
             $table->string("salon_name");
             $table->integer("nb_barber");
+            $table->integer("likes")->default(0);
             $table->string("phone");
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->timestamps();

@@ -26,6 +26,8 @@ Route::post('/sanctum/token',  [App\Http\Controllers\UserController::class, 'log
 
 Route::apiResource('/user',  App\Http\Controllers\UserController::class)->only('store');
 Route::middleware('auth:sanctum')->put('/user/upgradetosalon', [ App\Http\Controllers\UserController::class,"upgradeToSalon"]);
+Route::put('/salon/addlike/{id}', [ App\Http\Controllers\SalonController::class,"addlike"]);
+Route::put('/salon/deletelike/{id}', [ App\Http\Controllers\SalonController::class,"deletelike"]);
 Route::apiResource('/salon',  App\Http\Controllers\SalonController::class);
 Route::apiResource('/service',  App\Http\Controllers\ServiceController::class)->only(['store','show']);
 Route::apiResource('/barber',  App\Http\Controllers\BarberController::class);

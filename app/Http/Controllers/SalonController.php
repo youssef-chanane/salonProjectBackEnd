@@ -12,6 +12,18 @@ class SalonController extends Controller
     {
         $this->middleware('auth:sanctum')->only(['store','update','destroy']);
     }
+    public function addlike($id){
+        $salon=Salon::find($id);
+        $salon->likes=$salon->likes+1;
+        $salon->save();
+        return response()->json($salon);
+    }
+    public function deletelike($id){
+        $salon=Salon::find($id);
+        $salon->likes=$salon->likes-1;
+        $salon->save();
+        return response()->json($salon);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -19,7 +31,7 @@ class SalonController extends Controller
      */
     public function index()
     {
-        $salons=Salon::get();
+        $salons=Salon::orderBy("likes","desc")->get();
         return response()->json($salons);
     }
 
@@ -74,7 +86,7 @@ class SalonController extends Controller
     {
 
         $salon=Salon::find($id);
-        $this->authorize('update',$salon);
+        // $this->authorize('update',$salon);
         $salon->update($request->all());
         $salon->save();
         return response()->json($salon);

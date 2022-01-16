@@ -28,6 +28,9 @@ Route::apiResource('/user',  App\Http\Controllers\UserController::class)->only('
 Route::middleware('auth:sanctum')->put('/user/upgradetosalon', [ App\Http\Controllers\UserController::class,"upgradeToSalon"]);
 Route::put('/salon/addlike/{id}', [ App\Http\Controllers\SalonController::class,"addlike"]);
 Route::put('/salon/deletelike/{id}', [ App\Http\Controllers\SalonController::class,"deletelike"]);
+Route::post('/reserve', [ App\Http\Controllers\ReserveController::class,"store"]);
+Route::get('/reserve/{id}', [ App\Http\Controllers\ReserveController::class,"show"]);
+Route::delete('/reserve/{id}', [ App\Http\Controllers\ReserveController::class,"destroy"]);
 Route::apiResource('/salon',  App\Http\Controllers\SalonController::class);
 Route::apiResource('/service',  App\Http\Controllers\ServiceController::class)->only(['store','show']);
 Route::apiResource('/barber',  App\Http\Controllers\BarberController::class);
